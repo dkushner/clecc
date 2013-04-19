@@ -48,6 +48,8 @@ class FFEllipticCurve
                 friend Point operator+(const Point& lhs, const Point& rhs)
                 {
                     Element xR, yR;
+		    lhs.add(lhs.cx, lhs.cy, rhs.cx, rhs.cy, xR, yR);
+		    return Point(xR, yR, *lhs.curve);
 
                 }
                 friend Point operator*(int k, const Point& rhs)
@@ -57,7 +59,8 @@ class FFEllipticCurve
                 Point& operator+=(const Point& rhs)
                 {
                     addPoint(cx, cy, rhs.cx, rhs.cy, cx, cy);
-                }
+                    return *this;
+		}
                 Point& operator*=(int k)
                 {
                     *this = multiplyPoint(k, *this);
@@ -119,8 +122,12 @@ class FFEllipticCurve
                         slope = (3 * (x.value() * x.value()) + curve->getA()) / (2 * y);
                         xR = (slope * slope) - (2 * x);
                     }
-                    slope = (y - yy) / (x - xx);
-                    xR = (slope * slope) - x - xx;
+		    else
+		    {
+                    	slope = (y - yy) / (x - xx);
+                    	xR = (slope * slope) - x - xx;
+		    }
+
 
                     if(slope != 0)
                     {
@@ -149,7 +156,7 @@ class FFEllipticCurve
                             result += prod;
                             j = i;
                         }
-                        bits = bits >> 1;
+                        bits >>= 1;
                         i++;
                     }
                     return result;
@@ -225,10 +232,9 @@ class FFEllipticCurve
             for(int i = 0; i < P; i++)
             {
                 int sqr = i * i;
-                xValues[i] = ((i * sqr) + ca.value() * i + cb.value()) % P;
+                xValues[i] = ((i * sqr) + (ca.value() * i) + cb.value()) % P;
                 yValues[i] = sqr % P;
-		cout << xValues[i] << " " << yValues[i] << endl;
-            }
+	    }
 
             for(int x = 0; x < P; x++)
             {
@@ -236,8 +242,9 @@ class FFEllipticCurve
                 {
                     if(xValues[x] == yValues[y])
                     {
-                        points.push_back(Point(x, y, *this));
-                    }
+			cout << x << " " << y << endl;
+                        points.push_back(Point(x, y, *this));		          
+		    }
                 }
             }
         }
