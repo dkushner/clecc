@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <iostream>
+#include <limits.h>
 
 #include "FFElement.hpp"
 
@@ -48,19 +49,19 @@ class FFEllipticCurve
                 friend Point operator+(const Point& lhs, const Point& rhs)
                 {
                     Element xR, yR;
-		    lhs.add(lhs.cx, lhs.cy, rhs.cx, rhs.cy, xR, yR);
-		    return Point(xR, yR, *lhs.curve);
+					lhs.addPoint(lhs.cx, lhs.cy, rhs.cx, rhs.cy, xR, yR);
+					return Point(xR, yR, *lhs.curve);
 
                 }
                 friend Point operator*(int k, const Point& rhs)
                 {
-                    return Poin(rhs).operator*=(k);
+                    return Point(rhs).operator*=(k);
                 }
                 Point& operator+=(const Point& rhs)
                 {
                     addPoint(cx, cy, rhs.cx, rhs.cy, cx, cy);
                     return *this;
-		}
+                }
                 Point& operator*=(int k)
                 {
                     *this = multiplyPoint(k, *this);
@@ -79,6 +80,19 @@ class FFEllipticCurve
                 Element getY() const
                 {
                     return cy;
+                }
+
+                unsigned int order()
+                {
+                	Point r = *this;
+                	unsigned int n = 0;
+                	while(r.getX() != 0 && r.getY() != 0)
+                	{
+                		n++;
+                		r += *this;
+                		if(n == UINT_MAX) break;
+                	}
+                	return n;
                 }
 
             private:
@@ -122,11 +136,11 @@ class FFEllipticCurve
                         slope = (3 * (x.value() * x.value()) + curve->getA()) / (2 * y);
                         xR = (slope * slope) - (2 * x);
                     }
-		    else
-		    {
+					else
+					{
                     	slope = (y - yy) / (x - xx);
                     	xR = (slope * slope) - x - xx;
-		    }
+					}
 
 
                     if(slope != 0)
@@ -183,12 +197,11 @@ class FFEllipticCurve
         {
             return points[n];
         }
-
-        int getA() const
+        FFElement<P> getA() const
         {
             return ca;
         }
-        int getB() const
+        FFElement<P> getB() const
         {
             return cb;
         }
@@ -234,7 +247,7 @@ class FFEllipticCurve
                 int sqr = i * i;
                 xValues[i] = ((i * sqr) + (ca.value() * i) + cb.value()) % P;
                 yValues[i] = sqr % P;
-	    }
+            }
 
             for(int x = 0; x < P; x++)
             {
@@ -242,9 +255,9 @@ class FFEllipticCurve
                 {
                     if(xValues[x] == yValues[y])
                     {
-			cout << x << " " << y << endl;
-                        points.push_back(Point(x, y, *this));		          
-		    }
+						cout << x << " " << y << endl;
+						points.push_back(Point(x, y, *this));
+					}
                 }
             }
         }

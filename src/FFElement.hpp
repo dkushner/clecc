@@ -30,7 +30,7 @@ class FFElement
         {
             val = rhs.val;
             return *this;
-	}
+        }
         FFElement<P>& operator*=(const FFElement<P>& rhs)
         {
             val = (val * rhs.val) % P;
@@ -56,21 +56,21 @@ class FFElement
             return FFElement<P>(lhs.val - rhs.val);
         }
 
-	// Addition
+		// Addition
         friend FFElement<P> operator+(const FFElement<P>& lhs, const FFElement<P>& rhs)
-	{
-	    return FFElement<P>(lhs.val + rhs.val);
-	}
-	friend FFElement<P> operator+(const FFElement<P>& lhs, int i)
-        {
-            return FFElement<P>(lhs.val + i);
-        }
-	friend FFElement<P> operator+(int i, const FFElement<P>& rhs)
-	{
-	    return FFElement<P>(rhs.val + i);
-	}
+		{
+			return FFElement<P>(lhs.val + rhs.val);
+		}
+		friend FFElement<P> operator+(const FFElement<P>& lhs, int i)
+		{
+			return FFElement<P>(lhs.val + i);
+		}
+		friend FFElement<P> operator+(int i, const FFElement<P>& rhs)
+		{
+			return FFElement<P>(rhs.val + i);
+		}
 
-	// Multiplication
+		// Multiplication
         friend FFElement<P> operator*(int n, const FFElement<P>& rhs)
         {
             return FFElement<P>(n * rhs.val);
@@ -80,11 +80,11 @@ class FFElement
             return FFElement<P>(lhs.val * rhs.val);
         }
         
-	// Division
-	friend FFElement<P> operator/(const FFElement<P>& lhs, const FFElement<P>& rhs)
-	{
-	    return FFElement<P>(lhs.val * FFUtil::modInverse(rhs.val, P));
-	}
+		// Division
+		friend FFElement<P> operator/(const FFElement<P>& lhs, const FFElement<P>& rhs)
+		{
+			return FFElement<P>(lhs.val * FFUtil::modInverse(rhs.val, P));
+		}
 
         int value() const
         {
