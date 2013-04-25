@@ -28,4 +28,5 @@ So here's the deal. I've done OpenGL in the past for small projects and little t
 ##Sources
 
 [DKrypt](http://www.dkrypt.com/home/ecc) : Excellent source on a bunch of cryptography-related mathematics.
+
 [Jarl Ostensen's CodeProject](http://www.codeproject.com/Articles/22452/A-simple-C-implementation-of-Elliptic-Curve-Crypto) : Really nice framework for an ECC system. 
