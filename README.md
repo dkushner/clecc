@@ -25,3 +25,7 @@ The only real reason to do anything, I suppose: to learn. I'd always been curiou
 
 So here's the deal. I've done OpenGL in the past for small projects and little test applications. I've used CUDA before for a couple fluid physics simulations and some really simple numerical analysis. So naturally my intention is to mash together these two libraries until the twisted wreckage produces some eye-pleasing visualizations of the cryptosystem's internal processes. 
 
+##Sources
+
+[DKrypt](http://www.dkrypt.com/home/ecc) : Excellent source on a bunch of cryptography-related mathematics.
+[Jarl Ostensen's CodeProject](http://www.codeproject.com/Articles/22452/A-simple-C-implementation-of-Elliptic-Curve-Crypto) : Really nice framework for an ECC system. 
