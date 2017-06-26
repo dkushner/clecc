@@ -16,8 +16,8 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	// Init Elliptic Curve
-	typedef FFEllipticCurve<263> Curve;
+    // Init Elliptic Curve
+    typedef FFEllipticCurve<263> Curve;
 
     int a;
     int b;

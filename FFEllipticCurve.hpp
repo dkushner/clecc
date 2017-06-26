@@ -49,8 +49,8 @@ class FFEllipticCurve
                 friend Point operator+(const Point& lhs, const Point& rhs)
                 {
                     Element xR, yR;
-					lhs.addPoint(lhs.cx, lhs.cy, rhs.cx, rhs.cy, xR, yR);
-					return Point(xR, yR, *lhs.curve);
+          lhs.addPoint(lhs.cx, lhs.cy, rhs.cx, rhs.cy, xR, yR);
+          return Point(xR, yR, *lhs.curve);
 
                 }
                 friend Point operator*(int k, const Point& rhs)
@@ -84,15 +84,15 @@ class FFEllipticCurve
 
                 unsigned int order()
                 {
-                	Point r = *this;
-                	unsigned int n = 0;
-                	while(r.getX() != 0 && r.getY() != 0)
-                	{
-                		n++;
-                		r += *this;
-                		if(n == UINT_MAX) break;
-                	}
-                	return n;
+                  Point r = *this;
+                  unsigned int n = 0;
+                  while(r.getX() != 0 && r.getY() != 0)
+                  {
+                    n++;
+                    r += *this;
+                    if(n == UINT_MAX) break;
+                  }
+                  return n;
                 }
 
             private:
@@ -136,11 +136,11 @@ class FFEllipticCurve
                         slope = (3 * (x.value() * x.value()) + curve->getA()) / (2 * y);
                         xR = (slope * slope) - (2 * x);
                     }
-					else
-					{
-                    	slope = (y - yy) / (x - xx);
-                    	xR = (slope * slope) - x - xx;
-					}
+                    else
+                    {
+                      slope = (y - yy) / (x - xx);
+                      xR = (slope * slope) - x - xx;
+                    }
 
 
                     if(slope != 0)
@@ -255,9 +255,9 @@ class FFEllipticCurve
                 {
                     if(xValues[x] == yValues[y])
                     {
-						cout << x << " " << y << endl;
-						points.push_back(Point(x, y, *this));
-					}
+                      cout << x << " " << y << endl;
+                      points.push_back(Point(x, y, *this));
+                    }
                 }
             }
         }
